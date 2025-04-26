@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>График Авто Клуба</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 40px;
+      position: relative;
+      color: #fff;
+      min-height: 100vh;
+      z-index: 1;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("images/449f714s-960.jpg") no-repeat center center/cover;
+      filter: blur(10px);
+      z-index: -1;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 10px 20px;
+      border: 2px solid #fff;
+      border-radius: 30px;
+      color: #fff;
+      font-weight: bold;
+      transition: background-color 0.3s, color 0.3s, transform 0.3s;
+    }
+
+    nav a:hover {
+      background-color: #fff;
+      color: #000;
+      transform: scale(1.05);
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      font-size: 36px;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+      text-align: center;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 40px;
+      flex-wrap: wrap;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 20px;
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    #chart-container {
+      width: 400px;
+    }
+
+    table {
+      background: #fff;
+      color: #000;
+      border-collapse: collapse;
+      width: 400px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    table td, table th {
+      border: 1px solid #ccc;
+      padding: 8px;
+    }
+
+    table th {
+      background-color: #ddd;
+      text-align: center;
+    }
+
+    input[type="text"], input[type="number"], input[type="color"] {
+      width: 100%;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Главная</a>
+    <a href="tuning.html">Тюнинг</a>
+    <a href="repair.html">История авто</a>
+    <a href="care.html">Уход за авто</a>
+  </nav>
+
+  <h1>Статистика Авто Клуба</h1>
+  <div class="container">
+    <div id="chart-container">
+      <canvas id="myPieChart"></canvas>
+    </div>
+    <table id="data-table">
+      <thead>
+        <tr>
+          <th>Категория</th>
+          <th>Доля (%)</th>
+          <th>Цвет</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    const defaultData = [
+      { label: "Спорткары", value: 25, color: "#FF6384" },
+      { label: "Классика", value: 15, color: "#36A2EB" },
+      { label: "Внедорожники", value: 20, color: "#4BC0C0" },
+      { label: "Тюнинг", value: 18, color: "#FF9F40" },
+      { label: "Электрокары", value: 12, color: "#9966FF" },
+      { label: "Дрифт", value: 10, color: "#FFCD56" },
+    ];
+
+    let pieData = JSON.parse(localStorage.getItem("pieChartDataAutoClub")) || defaultData;
+
+    const ctx = document.getElementById("myPieChart").getContext("2d");
+    let myPieChart = new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels: pieData.map(d => d.label),
+        datasets: [{
+          data: pieData.map(d => d.value),
+          backgroundColor: pieData.map(d => d.color),
+          hoverOffset: 20
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              color: 'white'
+            }
+          }
+        }
+      }
+    });
+
+    function renderTable() {
+      const tbody = document.querySelector("#data-table tbody");
+      tbody.innerHTML = "";
+      pieData.forEach((item, index) => {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+          <td><input type="text" value="${item.label}" data-index="${index}" data-field="label"></td>
+          <td><input type="number" min="1" value="${item.value}" data-index="${index}" data-field="value"></td>
+          <td><input type="color" value="${item.color}" data-index="${index}" data-field="color"></td>
+        `;
+
+        tbody.appendChild(row);
+      });
+
+      document.querySelectorAll("input").forEach(input => {
+        input.addEventListener("input", e => {
+          const index = e.target.dataset.index;
+          const field = e.target.dataset.field;
+          pieData[index][field] = field === "value" ? parseInt(e.target.value) : e.target.value;
+          updateChart();
+        });
+      });
+    }
+
+    function updateChart() {
+      localStorage.setItem("pieChartDataAutoClub", JSON.stringify(pieData));
+      myPieChart.data.labels = pieData.map(d => d.label);
+      myPieChart.data.datasets[0].data = pieData.map(d => d.value);
+      myPieChart.data.datasets[0].backgroundColor = pieData.map(d => d.color);
+      myPieChart.update();
+    }
+
+    renderTable();
+  </script>
+</body>
+</html>

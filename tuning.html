@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Авто Тюнинг</title>
+  <link rel="stylesheet" href="tuning.css">
+  <script defer src="tuning.js"></script>
+</head>
+<body>
+
+<header>
+  <h1>Авто Тюнинг</h1>
+  <div class="page-select">
+    <select id="pageSelect">
+      <option value="tuning">Авто Тюнинг</option>
+      <option value="index">Главная</option>
+      <option value="repair">История Авто</option>
+      <option value="care">Уход за авто</option>
+      <option value="all">Полезные советы</option>
+    </select>
+  </div>
+</header>
+
+<nav>
+  <div class="menu-item">Двигатель и производительность
+    <div class="submenu">
+      <ul>
+        <li data-id="turbo">Турбонаддув / компрессор</li>
+        <li data-id="intercooler">Интеркулер</li>
+        <li data-id="chip">Чип-тюнинг (перепрошивка ЭБУ)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="menu-item">Трансмиссия
+    <div class="submenu">
+      <ul>
+        <li data-id="gear">Укороченная главная пара</li>
+        <li data-id="clutch">Спортивное сцепление</li>
+        <li data-id="lsd">Дифференциал повышенного трения (LSD)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="menu-item">Подвеска
+    <div class="submenu">
+      <ul>
+        <li data-id="shocks">Спортивные амортизаторы</li>
+        <li data-id="springs">Заниженные или регулируемые пружины</li>
+        <li data-id="airride">Пневмоподвеска</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="menu-item">Тормозная система
+    <div class="submenu">
+      <ul>
+        <li data-id="brakes">Спортивные тормозные диски и колодки</li>
+        <li data-id="calipers">Установка 4- или 6-поршневых суппортов</li>
+        <li data-id="disks">Перфорированные или вентилируемые диски</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="menu-item">Экстерьер
+    <div class="submenu">
+      <ul>
+        <li data-id="bodykit">Аэродинамический обвес</li>
+        <li data-id="spoiler">Спойлер / антикрыло</li>
+        <li data-id="arches">Расширители арок</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="menu-item">Интерьер
+    <div class="submenu">
+      <ul>
+        <li data-id="seats">Спортивные сиденья (ковши)</li>
+        <li data-id="belts">Ремни безопасности 4-6 точек</li>
+        <li data-id="wheel">Новый руль (MOMO, Nardi и пр.)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="menu-item">Электроника
+    <div class="submenu">
+      <ul>
+        <li data-id="alarm">Установка сигнализации</li>
+        <li data-id="immobilizer">Иммобилайзер</li>
+        <li data-id="security">Противоугонные системы</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="menu-item">Прочее
+    <div class="submenu">
+      <ul>
+        <li data-id="remote">Установка гидравлического ручника (для дрифта)</li>
+        <li data-id="handbrake">Замена выхлопной системы («прямотоком»)</li>
+        <li data-id="exhaust">Защита картера</li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <section id="intro">
+    <h2>Добро пожаловать в мир тюнинга!</h2>
+    <p>Выберите интересующую категорию из меню выше.</p>
+  </section>
+  <section id="tuning-info" class="hidden"></section>
+</main>
+
+
+
+</body>
+</html>

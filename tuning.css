@@ -1,0 +1,106 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+}
+
+.page-select {
+  margin-top: 10px;
+}
+
+nav {
+  background-color: #444;
+  width: 100%;
+  padding: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.menu-item {
+  display: inline-block;
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+  position: relative;
+}
+
+.menu-item:hover {
+  background-color: #555;
+}
+
+.submenu {
+  display: none;
+  background-color: #666;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  padding: 10px 15px; /* Добавлено: внутренние отступы по бокам и сверху/снизу */
+  border-radius: 6px;
+  width: max-content;
+  min-width: 250px; /* необязательно, но удобно */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.menu-item:hover .submenu {
+  display: block;
+}
+
+.submenu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.submenu li {
+  padding: 6px 0;
+  color: white;
+  white-space: nowrap; /* не переносить текст */
+}
+
+.menu-item + .menu-item {
+  margin-left: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+#tuning-info {
+  padding: 20px;
+  background-color: #f4f4f4;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.flex-container {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.text-block {
+  flex: 1;
+}
+
+.image-block {
+  flex: 0 0 300px;
+}
+
+.turbo-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
